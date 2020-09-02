@@ -1,6 +1,5 @@
 library(shiny)                  
 library(rsconnect)
-deployApp()
 
 #Parametros fijos:
 
@@ -19,33 +18,33 @@ modelowu <- function(delta,gamma,proba){return(proba^gamma/(proba^gamma+(1-proba
 
 modelo1p <- function(gamma,proba){return(exp(-(-log(proba))^gamma))}
 
-#Inicio de código para shinyapp
+#Inicio de cÃ³digo para shinyapp
 if(interactive()){
 
-ui <- navbarPage(title = "Teoría del Prospecto",    #navbarPage para abrir pestañas superiores
-  tabPanel(title = "Teoría del Prospecto",          #Iniciar código de primer pestaña 
-    tags$h1("Teoría del Prospecto"),
-    tags$h4("Xochitl Cárdenas - Lab 25"),
-    tags$p("La Teoría del Prospecto, propuesta en 1979 por Kahneman y Tversky, surge como una alternativa descriptiva a la teoría de Utilidad para elección bajo riesgo.",
-           "Esta teoría mantiene un principio de maximización asumiendo que las personas transforman los valores reales de probabilidad y recompensa en valores subjetivos. Dicha transformación se lleva a cabo en dos fases,",
-           "la primera es una de edición que consiste en interpretar un prospecto con respecto a un punto de referencia a partir del cual se computa el valor de las consecuencias en términos de ganancias o perdidas. La segunda fase",
-           "es una de evaluación, en la cual se evaluan y editan los prospectos a partir de dos funciones. Estas funciones son la función de valor y la función de ponderación, las cuales permiten transformar los valores objetivos en subjetivos.",
+ui <- navbarPage(title = "TeorÃ­a del Prospecto",    #navbarPage para abrir pestaÃ±as superiores
+  tabPanel(title = "TeorÃ­a del Prospecto",          #Iniciar cÃ³digo de primer pestaÃ±a 
+    tags$h1("TeorÃ­a del Prospecto"),
+    tags$h4("Xochitl CÃ¡rdenas - Lab 25"),
+    tags$p("La TeorÃ­a del Prospecto, propuesta en 1979 por Kahneman y Tversky, surge como una alternativa descriptiva a la teorÃ­a de Utilidad para elecciÃ³n bajo riesgo.",
+           "Esta teorÃ­a mantiene un principio de maximizaciÃ³n asumiendo que las personas transforman los valores reales de probabilidad y recompensa en valores subjetivos. Dicha transformaciÃ³n se lleva a cabo en dos fases,",
+           "la primera es una de ediciÃ³n que consiste en interpretar un prospecto con respecto a un punto de referencia a partir del cual se computa el valor de las consecuencias en tÃ©rminos de ganancias o perdidas. La segunda fase",
+           "es una de evaluaciÃ³n, en la cual se evaluan y editan los prospectos a partir de dos funciones. Estas funciones son la funciÃ³n de valor y la funciÃ³n de ponderaciÃ³n, las cuales permiten transformar los valores objetivos en subjetivos.",
             br(),
             "El valor de un prospecto simple es definido como:",
              br(em("V(x,p)= w(p)(v(x))")),
             "donde v calcula el valor subjetivo de la consecuencia x, mientras que w lo hace con el impacto de la probabilidad p.",
              br(),
               br(),
-              br(em("Puedes encontrar el código de está app en el siguiente link: ",
+              br(em("Puedes encontrar el cÃ³digo de estÃ¡ app en el siguiente link: ",
                 ))),
     tags$a (href="//github.com/xochitlcardenas/Teoria-del-Prospecto-Shinyapp.git", "Github repository")
   ),
   
-  # tabPanel(title = "Función de Valor",                 #segunda pestaña
-  #   tags$h1("Función de valor"),
-  #   tags$p("La función de utilidad es remplazada por la función de valor en ganancias o pérdidas relativo a un punto de referencia.",
-  #           "Esta es una función psicofisica ya que refleja el impacto marginal de un cambio de valor disminuye con la distancia entre el",
-  #           "punto de referencia, lo cuál genera una forma concava a la representación grafica para ganancias y convexa para pérdidas."), 
+  # tabPanel(title = "FunciÃ³n de Valor",                 #segunda pestaÃ±a
+  #   tags$h1("FunciÃ³n de valor"),
+  #   tags$p("La funciÃ³n de utilidad es remplazada por la funciÃ³n de valor en ganancias o pÃ©rdidas relativo a un punto de referencia.",
+  #           "Esta es una funciÃ³n psicofisica ya que refleja el impacto marginal de un cambio de valor disminuye con la distancia entre el",
+  #           "punto de referencia, lo cuÃ¡l genera una forma concava a la representaciÃ³n grafica para ganancias y convexa para pÃ©rdidas."), 
   # tabsetPanel(
   #   tabPanel(
   #     title = "",
@@ -59,34 +58,34 @@ ui <- navbarPage(title = "Teoría del Prospecto",    #navbarPage para abrir pesta
   # ) #cierra tabsetPanel
   #   ), #cierra tabPanel Funcion de valor 
   
-  tabPanel(title = "Función de ponderación",          #tercer pestaña 
-    tags$h1("Función de ponderación"),
-    tags$p("Siendo la función de ponderación la segunda escala para evaluar un prospecto, esta función representa el impacto de la probabilidad de obtener un resultado sobre la valoración del prospecto. Esto se obtiene al ponderar la recompensa por un peso de decisión.",
-            "La representación gráfica de esta función adopta una forma de S invertida que muestra la sobreponderacion de probabilidades bajas y subponderaciones para probabilidades grandes. "),
-    tags$h3("Parametrización"),
-    tags$p("Para la aplicación de la Teoría del Prospecto se requiere evaluar y modelar de manera individual cada una de las funciones." ,
-           br(em("Te invito a que juegues con los valores y observes cómo se modifica la gráfica"))),
-    tabsetPanel(                              #abre subpestañas en pestaña superior 
+  tabPanel(title = "FunciÃ³n de ponderaciÃ³n",          #tercer pestaÃ±a 
+    tags$h1("FunciÃ³n de ponderaciÃ³n"),
+    tags$p("Siendo la funciÃ³n de ponderaciÃ³n la segunda escala para evaluar un prospecto, esta funciÃ³n representa el impacto de la probabilidad de obtener un resultado sobre la valoraciÃ³n del prospecto. Esto se obtiene al ponderar la recompensa por un peso de decisiÃ³n.",
+            "La representaciÃ³n grÃ¡fica de esta funciÃ³n adopta una forma de S invertida que muestra la sobreponderacion de probabilidades bajas y subponderaciones para probabilidades grandes. "),
+    tags$h3("ParametrizaciÃ³n"),
+    tags$p("Para la aplicaciÃ³n de la TeorÃ­a del Prospecto se requiere evaluar y modelar de manera individual cada una de las funciones." ,
+           br(em("Te invito a que juegues con los valores y observes cÃ³mo se modifica la grÃ¡fica"))),
+    tabsetPanel(                              #abre subpestaÃ±as en pestaÃ±a superior 
       
-      tabPanel(                               #primer pestaña
+      tabPanel(                               #primer pestaÃ±a
         title = "K y T",
-        tags$h3("Modelo de Parametrización de Kahneman y Tversky"),
-        tags$p("Tversky y Kahneman (1992) proponen una función de ponderación con un único parámetro (??).",
+        tags$h3("Modelo de ParametrizaciÃ³n de Kahneman y Tversky"),
+        tags$p("Tversky y Kahneman (1992) proponen una funciÃ³n de ponderaciÃ³n con un Ãºnico parÃ¡metro (??).",
                 br(em("     w(p)= p^?? / (p^?? + (1 - p)^??)^??"))),
         sidebarLayout(                       #divide pagina en dos partes
           sidebarPanel(                      #primer parte, aparece barra de parametro variable
             sliderInput("gamma1", "Elige un valor de gamma", min = 0, max = 1, value = 0.5)
             ),
-          mainPanel(                         #segunda parte, aparece gráfica 
-            plotOutput("modelokytplot")      #variable que permite leer código de gráfica (se encuentra en server) 
+          mainPanel(                         #segunda parte, aparece grÃ¡fica 
+            plotOutput("modelokytplot")      #variable que permite leer cÃ³digo de grÃ¡fica (se encuentra en server) 
           )#cierra mainPanel
         ) #cierra sidebarLayout
       ), #cierra tabPanel de tabsetPanel "k Y t"
       
       tabPanel(
         title = "Modelo de Goldstein",
-        tags$h3("Modelo de Parametrización de Goldstein - Einhorn"),
-        tags$p("En este modelo se incluye un segundo parámetro (??) que controla la elevación de la función de ponderación, y el parámetro (??) que controla la curvatura.", 
+        tags$h3("Modelo de ParametrizaciÃ³n de Goldstein - Einhorn"),
+        tags$p("En este modelo se incluye un segundo parÃ¡metro (??) que controla la elevaciÃ³n de la funciÃ³n de ponderaciÃ³n, y el parÃ¡metro (??) que controla la curvatura.", 
           br(em("           w(p) = p^?? / ??*p^?? + (1-p)^??"))),
         sidebarLayout(
           sidebarPanel(
@@ -101,8 +100,8 @@ ui <- navbarPage(title = "Teoría del Prospecto",    #navbarPage para abrir pesta
       
       tabPanel(
         title = "Modelo de Wu",
-        tags$h3("Modelo de Parametrización de Wu y Gonzalez"),
-        tags$p("Este modelo de parametrización incluye dos parámetros (?? y ??).",
+        tags$h3("Modelo de ParametrizaciÃ³n de Wu y Gonzalez"),
+        tags$p("Este modelo de parametrizaciÃ³n incluye dos parÃ¡metros (?? y ??).",
              br(em("         w(p) = p^?? / (p^?? + (1-p) ^??)^ ?? "))),
         sidebarLayout(
           sidebarPanel(
@@ -117,11 +116,11 @@ ui <- navbarPage(title = "Teoría del Prospecto",    #navbarPage para abrir pesta
       
       tabPanel(
         title = "Single Parameter",
-        tags$h3("Modelo de Parametrización de Un Parametro"),
-        tags$p("Prelec (1998) deriva una función de la función de ponderación que ajusta 3 principios:",
-               br("-Sobreponderación y subponderación de probabilidades"),
-               br("-Subproporcionalidad de ponderaciones de decisión"),
-               br("-Subaditividad de ponderaciones de decisión"),
+        tags$h3("Modelo de ParametrizaciÃ³n de Un Parametro"),
+        tags$p("Prelec (1998) deriva una funciÃ³n de la funciÃ³n de ponderaciÃ³n que ajusta 3 principios:",
+               br("-SobreponderaciÃ³n y subponderaciÃ³n de probabilidades"),
+               br("-Subproporcionalidad de ponderaciones de decisiÃ³n"),
+               br("-Subaditividad de ponderaciones de decisiÃ³n"),
                br(em("                w(p) = exp[-(-lnp)^??]"))),
         sidebarLayout(
           sidebarPanel(
@@ -139,9 +138,9 @@ ui <- navbarPage(title = "Teoría del Prospecto",    #navbarPage para abrir pesta
 ) #cierra el navbarPage
 
 
-server <- function(input, output){             #segunda parte de template para diseño de shinyapp 
+server <- function(input, output){             #segunda parte de template para diseÃ±o de shinyapp 
   
-  output$modelokytplot <- renderPlot ({        #render permite generar codigo de gráfica 
+  output$modelokytplot <- renderPlot ({        #render permite generar codigo de grÃ¡fica 
     curve(modelokyt(input$gamma1, x), #parametros del modelo
       from = 0, 
       to = 100,
@@ -207,5 +206,7 @@ server <- function(input, output){             #segunda parte de template para d
     
 } #cierra server
 
-shinyApp(ui, server)              #manda todo el código a la página de la app
+shinyApp(ui, server)              #manda todo el cÃ³digo a la pÃ¡gina de la app
 }
+
+deployApp()
