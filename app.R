@@ -1,5 +1,5 @@
                 
-rsconnect::setAccountInfo(name='xochitlcardenasmtz', token='9AAB8532CA48CEF571BD5DFAB337D7C2', secret='CatoYk3lluPChfHQEUm3faU9aNu1G7XhwUQB4Sfc')
+
 
 
 #Parametros fijos:
