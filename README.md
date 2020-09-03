@@ -1,1 +1,0 @@
-# Teoria-del-Prospecto-Shinyapp
